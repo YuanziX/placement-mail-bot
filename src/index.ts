@@ -29,7 +29,7 @@ async function readRecentEmails() {
         const fetchOptions = { bodies: [''] };
         console.log("getting mails")
         const messages = await connection.search(searchCriteria, fetchOptions);
-        console.log("got mails")
+        console.log("got mails", messages.length)
 
         for (const item of messages) {
             const all = item.parts.find(part => part.which === '');
