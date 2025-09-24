@@ -1,55 +1,7 @@
-import { Agent, tool } from "@openai/agents";
-import { z } from "zod";
-import dotenv from "dotenv";
-import TelegramBot from "node-telegram-bot-api";
+import { Agent } from "@openai/agents";
 import { google } from "@ai-sdk/google";
 import { aisdk } from "@openai/agents-extensions";
-
-dotenv.config();
-
-const token = process.env.TOKEN!;
-const chatId = process.env.CHATID!;
-
-const bot = new TelegramBot(token, {
-  request: {
-    agentOptions: {
-      keepAlive: true,
-      family: 4,
-    },
-    url: "https://api.telegram.org",
-  },
-});
-
-async function createMessage(details: string) {
-  try {
-    await bot.sendMessage(chatId, details);
-  } catch (error) {
-    throw error;
-  }
-}
-
-const mailTool = tool({
-  name: "mail tool",
-  description: "Send important mail details via Telegram",
-  parameters: z.object({
-    details: z.string().describe("All important mail info"),
-  }),
-  execute: async ({ details }) => {
-    console.log("Sending important mail...", details);
-    await createMessage(details);
-  },
-});
-
-const nonImpMailTool = tool({
-  name: "non imp mail tool",
-  description: "Logs non-important mail details",
-  parameters: z.object({
-    details: z.string().describe("All non-important mail info"),
-  }),
-  execute: ({ details }) => {
-    console.log("Non-important mail:", details);
-  },
-});
+import { mailTool, nonImpMailTool } from "./tools";
 
 const geminiModel = aisdk(google("gemini-2.5-flash"));
 
