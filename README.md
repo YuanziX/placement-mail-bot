@@ -73,7 +73,7 @@ docker run -d \
 Create a `docker-compose.yml` file:
 
 ```yaml
-version: '3.8'
+version: "3.8"
 services:
   mail-bot:
     image: subhadeepthandaka/mail-bot:latest
@@ -88,19 +88,20 @@ services:
 ```
 
 Run with:
+
 ```bash
 docker-compose up -d
 ```
 
 ## ⚙️ Environment Variables
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `OPENAI_API_KEY` | Your OpenAI API key for intelligent email processing | ✅ |
-| `TOKEN` | Telegram bot token from BotFather | ✅ |
-| `CHATID` | Your Telegram chat ID to receive notifications | ✅ |
-| `EMAIL_USER` | Your email address (Gmail recommended) | ✅ |
-| `EMAIL_PASS` | Email app password (not regular password) | ✅ |
+| Variable         | Description                                          | Required |
+| ---------------- | ---------------------------------------------------- | -------- |
+| `OPENAI_API_KEY` | Your OpenAI API key for intelligent email processing | ✅       |
+| `TOKEN`          | Telegram bot token from BotFather                    | ✅       |
+| `CHATID`         | Your Telegram chat ID to receive notifications       | ✅       |
+| `EMAIL_USER`     | Your email address (Gmail recommended)               | ✅       |
+| `EMAIL_PASS`     | Email app password (not regular password)            | ✅       |
 
 ## 📱 How It Works
 
@@ -113,6 +114,7 @@ docker-compose up -d
 ## 🔍 Placement Keywords Detected
 
 The bot intelligently identifies emails related to:
+
 - Job placements
 - Interview invitations
 - Recruitment updates
@@ -148,16 +150,19 @@ docker logs -f mail-bot
 ### Common Issues
 
 **Bot not receiving emails:**
+
 - Verify email credentials
 - Check if 2FA and app password are set up correctly
 - Ensure IMAP is enabled in Gmail settings
 
 **No Telegram notifications:**
+
 - Verify bot token and chat ID
 - Make sure you've started a chat with the bot
 - Check if the bot has permission to send messages
 
 **OpenAI errors:**
+
 - Verify API key is valid and has credits
 - Check OpenAI service status
 - Monitor rate limits
@@ -186,6 +191,7 @@ This project is open source and available under the MIT License.
 ## 🤝 Support
 
 If you encounter any issues or need help:
+
 1. Check the troubleshooting section
 2. Review container logs
 3. Create an issue on GitHub
@@ -195,4 +201,4 @@ If you encounter any issues or need help:
 
 **Made with ❤️ for placement notifications**
 
-*Stay updated on your placement opportunities without constantly checking emails!*
+_Stay updated on your placement opportunities without constantly checking emails!_
