@@ -2,6 +2,9 @@ import { Agent, tool } from "@openai/agents";
 import { z } from "zod";
 import dotenv from "dotenv";
 import TelegramBot from "node-telegram-bot-api";
+import { google } from "@ai-sdk/google";
+import { aisdk } from "@openai/agents-extensions";
+
 dotenv.config();
 
 const token = process.env.TOKEN!;
@@ -48,9 +51,11 @@ const nonImpMailTool = tool({
   },
 });
 
+const geminiModel = aisdk(google("gemini-2.5-flash"));
+
 const mailAgent = new Agent({
   name: "Mail Checker Agent",
-  model: "gpt-4.1-mini",
+  model: geminiModel,
   instructions: `
         You will be given the content of an email. 
         If the mail is related to placement, send a Telegram message using the "mail tool" 
