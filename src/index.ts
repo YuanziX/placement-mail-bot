@@ -3,6 +3,7 @@ import { simpleParser } from "mailparser";
 import dotenv from "dotenv";
 import mailAgent from "./agent";
 import { run } from "@openai/agents";
+import { IGNORE_MAILS_FROM_ADDRS } from "./constants";
 
 dotenv.config();
 
@@ -34,6 +35,15 @@ async function readRecentEmails() {
     for (const item of messages) {
       const all = item.parts.find((part) => part.which === "");
       const parsed = await simpleParser(all.body);
+
+      if (
+        IGNORE_MAILS_FROM_ADDRS.includes(
+          (parsed.from["value"][0]["address"] as string).toLowerCase()
+        )
+      ) {
+        console.log("Ignoring mail from:", parsed.from["value"][0]["address"]);
+        continue;
+      }
 
       if (parsed.date && parsed.date > fiveMinutesAgo) {
         const mailData = {
