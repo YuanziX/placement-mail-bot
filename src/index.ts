@@ -51,7 +51,25 @@ async function readRecentEmails() {
           from: parsed.from?.text,
           text: parsed.text,
           date: parsed.date,
+          hasRegNumber: false,
         };
+
+        if (parsed.attachments && parsed.attachments.length > 0) {
+          // check if excel sheet is here
+          const excelAttachment = parsed.attachments.find((attachment) =>
+            attachment.contentType.includes("spreadsheet")
+          );
+          if (excelAttachment) {
+            // parse and check for USER_REGISTRATION_NUMBER
+            if (
+              process.env.USER_REGISTRATION_NUMBER &&
+              parsed.text.includes(process.env.USER_REGISTRATION_NUMBER)
+            ) {
+              mailData["hasRegNumber"] = true;
+            }
+          }
+        }
+
         await run(
           mailAgent,
           `This is the mail data: ${JSON.stringify(mailData)}`
