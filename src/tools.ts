@@ -36,8 +36,12 @@ export const addCalendarEventTool = tool({
       .string()
       .describe("Event description, if any url exists, include that too"),
     location: z.string().describe("Event location"),
-    start: z.string().datetime().describe("Event start time"),
-    end: z.string().datetime().describe("Event end time"),
+    start: z
+      .string()
+      .describe("Event start time, example: 2015-05-28T17:00:00-07:00"),
+    end: z
+      .string()
+      .describe("Event end time, example: 2015-05-28T17:00:00-07:00"),
   }),
   execute: async ({ summary, description, location, start, end }) => {
     console.log("Adding event to calendar...", {
