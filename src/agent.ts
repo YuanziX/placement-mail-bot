@@ -1,13 +1,13 @@
 import { Agent } from "@openai/agents";
-import { google } from "@ai-sdk/google";
+import { groq } from "@ai-sdk/groq";
 import { aisdk } from "@openai/agents-extensions";
 import { mailTool, nonImpMailTool } from "./tools";
 
-const geminiModel = aisdk(google("gemini-2.5-flash"));
+const groqModel = aisdk(groq("qwen/qwen3-32b"));
 
 const mailAgent = new Agent({
   name: "Mail Checker Agent",
-  model: geminiModel,
+  model: groqModel,
   instructions: `
         You will be given the content of an email. 
         If the mail is related to placement, send a Telegram message using the "mail tool" 

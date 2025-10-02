@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@ai-sdk/google": "^2.0.16",
+    "@ai-sdk/groq": "^2.0.22",
     "@openai/agents": "^0.1.3",
     "@openai/agents-extensions": "^0.1.2",
     "axios": "^1.12.2",
